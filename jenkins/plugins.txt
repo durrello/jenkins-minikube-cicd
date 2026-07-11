@@ -1,0 +1,26 @@
+# Jenkins plugins to pre-install
+# Core pipeline
+workflow-aggregator:latest
+pipeline-stage-view:latest
+pipeline-graph-view:latest
+
+# Docker
+docker-workflow:latest
+docker-plugin:latest
+
+# Kubernetes
+kubernetes:latest
+kubernetes-cli:latest
+
+# Git
+git:latest
+github:latest
+github-branch-source:latest
+
+# Blue Ocean UI
+blueocean:latest
+
+# Utilities
+credentials-binding:latest
+timestamper:latest
+ansicolor:latest

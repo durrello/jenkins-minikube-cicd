@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  jenkins:
+    build:
+      context: ./jenkins
+      dockerfile: Dockerfile
+    container_name: jenkins
+    restart: unless-stopped
+    ports:
+      - "8080:8080"    # Jenkins web UI
+      - "50000:50000"  # Jenkins agent communication
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock  # Docker-in-Docker via socket
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+    networks:
+      - cicd
+
+  registry:
+    image: registry:2
+    container_name: registry
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      - registry_data:/var/lib/registry
+    networks:
+      - cicd
+
+volumes:
+  jenkins_home:
+    name: jenkins_home
+  registry_data:
+    name: registry_data
+
+networks:
+  cicd:
+    driver: bridge
