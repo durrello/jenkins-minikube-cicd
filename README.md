@@ -6,13 +6,13 @@ A complete, local CI/CD demo: Jenkins (in Docker) builds a Go app container, pus
 
 ```
 ┌──────────┐     ┌─────────────────────────────────────────────────┐     ┌────────────────┐
-│Developer │────▶│             Jenkins (Docker)                     │────▶│   Minikube     │
-│          │     │                                                  │     │                │
-│ git push │     │  Checkout → Test → Build → Push → Deploy → Verify│     │  ┌──────────┐ │
-└──────────┘     └────────────────────┬────────────────────────────┘     │  │demo-app  │ │
-                                      │                                   │  │(2 pods)  │ │
-                                      ▼                                   │  └──────────┘ │
-                              ┌───────────────┐                           └────────────────┘
+│Developer │────▶│             Jenkins (Docker)                    │────▶│   Minikube     │
+│          │     │                                                 │     │                │
+│ git push │     │ Checkout → Test → Build → Push → Deploy → Verify│     │  ┌──────────┐  │
+└──────────┘     └────────────────────┬────────────────────────────┘     │  │demo-app  │  │
+                                      │                                  │  │(2 pods)  │  │
+                                      ▼                                  │  └──────────┘  │
+                              ┌───────────────┐                          └────────────────┘
                               │Local Registry │
                               │localhost:5000 │
                               └───────────────┘
