@@ -111,6 +111,7 @@ Update `app/Dockerfile` to use a different Go version or base image for the runt
 
 | Problem | Solution |
 |---------|----------|
+| Port 5000 already in use (macOS) | AirPlay Receiver uses port 5000. Disable it in System Settings → General → AirDrop & Handoff, or use port 5001 in `docker-compose.yml` |
 | Jenkins container won't start | Check Docker is running: `docker info` |
 | Can't push to registry | Verify registry is up: `curl http://localhost:5000/v2/` |
 | kubectl commands fail in Jenkins | Ensure kubectl is in the Jenkins image and kubeconfig is accessible |

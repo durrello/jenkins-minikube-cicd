@@ -18,6 +18,7 @@ spec:
       containers:
         - name: demo-app
           image: localhost:5000/demo-app:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
               protocol: TCP
