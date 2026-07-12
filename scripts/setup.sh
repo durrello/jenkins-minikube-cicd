@@ -47,6 +47,15 @@ info "Starting Jenkins and Docker Registry..."
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 
+# Detect macOS AirPlay Receiver conflict on port 5000
+REGISTRY_PORT=5000
+if lsof -i :5000 >/dev/null 2>&1; then
+    warn "Port 5000 is in use (macOS AirPlay Receiver?)."
+    warn "Using port 5001 for the Docker registry instead."
+    warn "To free port 5000: System Settings → General → AirDrop & Handoff → AirPlay Receiver → Off"
+    export REGISTRY_PORT=5001
+fi
+
 docker compose -f "$PROJECT_DIR/docker-compose.yml" up -d --build
 
 # ---------- Wait for Jenkins ----------
@@ -73,7 +82,7 @@ echo "  🚀 CI/CD Environment Ready!"
 echo "=============================================="
 echo ""
 echo "  Jenkins UI:      ${JENKINS_URL}"
-echo "  Registry:        http://localhost:5000"
+echo "  Registry:        http://localhost:${REGISTRY_PORT}"
 echo "  Minikube IP:     $(minikube ip)"
 echo ""
 
